@@ -97,6 +97,14 @@ class NewsletterByID(Resource):
 
         return newsletter.to_dict()
 
+    def delete(self, id):
+        newsletter = db.session.get(Newsletter, id)
+
+        db.session.delete(newsletter)
+        db.session.commit()
+
+        return {'message': 'record successfully deleted'}
+
 
 api.add_resource(NewsletterByID, '/newsletters/<int:id>')
 
